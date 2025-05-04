@@ -36,23 +36,75 @@ int minNumFlips(int arr[],int n ,int k) {
     return res;
 }
 
-int main() {
-
-
-    cout<<"***************** Welcome to our Binary Array ****************"<<endl;
+void runFromTerminal(){
     cout<<"Enter the number of elements in the array: ";
     int n;
     cin>>n;
     int arr[n];
     cout << "Enter the binary elements (0 or 1): ";
     for (int i = 0; i < n; i++) {
-        cin>>arr[i];
+        while (true) {
+            cin >> arr[i];
+            if (arr[i] == 0 || arr[i] == 1)
+                break;
+            cout << "Invalid input. Enter 0 or 1 only: ";
+        }
     }
     int k;
     cout << "Enter the size of subarray to flip: ";
     cin>>k;
     int res = minNumFlips(arr,n,k);
     cout<<res<<endl;
+}
+void runFromFile() {
+    string fileName;
+    cout << "\nPlease, enter file name:";
+    while (true) {
+        getline(cin, fileName);
+        // Input the file and check from existing
+        if (fileName.size() < 5 || fileName.substr(fileName.size() - 4) != ".txt") {
+            cout << "\nThe file name should be like this ----> (file name).txt\n";
+            cout << "Please, enter a valid file name:";
+            continue;
+        }
+        ifstream file(fileName);
+        if (!file.is_open()) {
+            cout << "\nFile not found! Please, enter a valid file name:";
+            continue;
+        }
+    }
+}
+
+int main() {
+
+    cout<<"***************** Welcome to our Binary Array ****************"<<endl;
+    string choice;
+    while (true) {
+        while (true) {
+            cout << "\nWhat do you want to do?" << endl;
+            cout << "1) Run From Terminal." << endl;
+            cout << "2) Initialize in main." << endl;
+            cout << "3) Exit." << endl;
+            cout << "\nPlease, enter your choice : ";
+            getline(cin, choice);
+
+            // Check the validity of input.
+            if (choice == "1" || choice == "2" || choice == "3") break;
+            cout << "Invalid choice. Please, Try again." << endl;
+        }
+
+        // Run from the terminal.
+        if (choice == "1") runFromTerminal();
+
+        // Initialize in main.
+        else if (choice == "2") runFromFile();
+        else break;
+        cin.ignore();
+    }
+
+    cout << "\n----- Thank you for using our system! Goodbye! -----" << endl;
     return 0;
 }
+
+
 
