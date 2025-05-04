@@ -1,0 +1,18 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "C:/Users/COMPUMARTS/Projects/DataSturcture/cmake-build-debug",
+	"dir-cur-src" : "C:/Users/COMPUMARTS/Projects/DataSturcture",
+	"dir-top-bld" : "C:/Users/COMPUMARTS/Projects/DataSturcture/cmake-build-debug",
+	"dir-top-src" : "C:/Users/COMPUMARTS/Projects/DataSturcture",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "C:/Users/COMPUMARTS/Projects/DataSturcture/cmake-build-debug/CMakeFiles/DataSturcture.dir"
+}

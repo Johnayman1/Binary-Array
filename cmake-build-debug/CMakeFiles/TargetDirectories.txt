@@ -1,0 +1,3 @@
+C:/Users/COMPUMARTS/Projects/DataSturcture/cmake-build-debug/CMakeFiles/DataSturcture.dir
+C:/Users/COMPUMARTS/Projects/DataSturcture/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/COMPUMARTS/Projects/DataSturcture/cmake-build-debug/CMakeFiles/rebuild_cache.dir

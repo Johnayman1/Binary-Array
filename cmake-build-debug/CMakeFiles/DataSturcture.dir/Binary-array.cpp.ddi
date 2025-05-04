@@ -1,0 +1,11 @@
+{
+"rules": [
+{
+"primary-output": "CMakeFiles/DataSturcture.dir/Binary-array.cpp.o",
+"requires": [
+]
+}
+],
+"version": 0,
+"revision": 0
+}
