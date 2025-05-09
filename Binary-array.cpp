@@ -18,45 +18,80 @@
 using namespace std;
 
 
-int minNumFlips(int arr[],int n ,int k) {
+class binary_array {
+
+    int size = 0 ;
+    int sizeOfSub = 0;
+    int *arr;
+    public:
+    binary_array(int size = 100 , int sizeOfSub = 0) ;
+    ~binary_array();
+    int minNumFlips();
+    void runFromTerminal();
+    void runFromFile();
+    void displayMenu();
+
+
+};
+
+//=================================== constructor
+binary_array::binary_array(int size , int sizeOfSub ) {
+    this->size = size;
+    this->sizeOfSub = sizeOfSub;
+    this->arr = new int[size];
+}
+
+
+//=================================== Calculate Flips
+int binary_array::minNumFlips() {
 
     int flips , res;
     flips = res =0;
-    for (int i = 0; i < n; i++) {
-        if (i - k >= 0 and arr[i-k] == 2)
+    for (int i = 0; i < this->size; i++) {
+        if (i - this->sizeOfSub >= 0 and arr[i - this->sizeOfSub] == 2)
             flips--;
         if ((arr[i] + flips) % 2 == 0) {
-            if (i + k > n)
+            if (i + this->sizeOfSub > this->size )
                 return -1;
             res++;
             flips++;
-            arr[i] = 2;
+            this->arr[i] = 2;
         }
     }
     return res;
 }
+//=================================== Method for run from terminal
+void binary_array::runFromTerminal(){
 
-void runFromTerminal(){
     cout<<"Enter the number of elements in the array: ";
-    int n;
-    cin>>n;
-    int arr[n];
-    cout << "Enter the binary elements (0 or 1): ";
-    for (int i = 0; i < n; i++) {
+    cin >> this->size ;
+    delete[] this->arr;
+    this->arr = new int[this->size];
+    cout << "Please enter binary elements (0 or 1) only! "<<endl;
+    for (int i = 0; i < this->size; i++) {
         while (true) {
-            cin >> arr[i];
+            cout << "Enter the "<< i+1 <<" element: ";
+            cin >> this->arr[i];
             if (arr[i] == 0 || arr[i] == 1)
                 break;
-            cout << "Invalid input. Enter 0 or 1 only: ";
+            cout << "Invalid input. Enter 0 or 1 only!!"<<endl;
         }
     }
-    int k;
-    cout << "Enter the size of subarray to flip: ";
-    cin>>k;
-    int res = minNumFlips(arr,n,k);
-    cout<<res<<endl;
+    while (true) {
+        cout << "Enter the size of subarray to flip: ";
+        cin >> this->sizeOfSub ;
+        if (this->sizeOfSub >= 0) {
+            break;
+        }
+    }
+    int res = 0;
+    res = minNumFlips();
+    cout<<"Minimum number of flips is : "<< res <<endl;
 }
-void runFromFile() {
+
+
+//=================================== Method for run from file
+void binary_array::runFromFile() {
     string fileName;
     cout << "\nPlease, enter file name:";
     while (true) {
@@ -70,20 +105,43 @@ void runFromFile() {
         ifstream file(fileName);
         if (!file.is_open()) {
             cout << "\nFile not found! Please, enter a valid file name:";
-            continue;
         }
+        int numOfTests;
+        file >> numOfTests;
+        for (int j = 1; j <= numOfTests; j++){
+            file >> this->size;
+            delete[] this->arr;
+            this->arr = new int[this->size];
+            for (int i = 0; i < this->size; i++) {
+                file >> this->arr[i];
+            }
+
+            file >> this->sizeOfSub;
+
+            cout << "\nTest Case #" << j << endl;
+            cout << "\nArray Size: " << this->size << endl;
+            cout << "Array Elements: ";
+            for (int i = 0; i < this->size; i++) {
+                cout << this->arr[i] << " ";
+            }
+            cout << "\nSubarray Size: " << this->sizeOfSub << endl;
+            int res = 0;
+            res = minNumFlips();
+            cout << "Minimum number of flips is: " << res << endl;
+        }
+        file.close();
+        break;
     }
 }
 
-int main() {
-
-    cout<<"***************** Welcome to our Binary Array ****************"<<endl;
+//=================================== Display Menu
+void binary_array::displayMenu() {
     string choice;
     while (true) {
         while (true) {
             cout << "\nWhat do you want to do?" << endl;
             cout << "1) Run From Terminal." << endl;
-            cout << "2) Initialize in main." << endl;
+            cout << "2) Run From File." << endl;
             cout << "3) Exit." << endl;
             cout << "\nPlease, enter your choice : ";
             getline(cin, choice);
@@ -94,14 +152,25 @@ int main() {
         }
 
         // Run from the terminal.
-        if (choice == "1") runFromTerminal();
-
-        // Initialize in main.
+        if (choice == "1") {
+            runFromTerminal();
+            cin.ignore();
+        }
+        // Run from the file.
         else if (choice == "2") runFromFile();
         else break;
-        cin.ignore();
     }
+}
+binary_array::~binary_array() {
+    delete[] arr;
+}
 
+
+int main() {
+
+    cout<<"***************** Welcome to our Binary Array ****************"<<endl;
+    binary_array myArray;
+    myArray.displayMenu();
     cout << "\n----- Thank you for using our system! Goodbye! -----" << endl;
     return 0;
 }
